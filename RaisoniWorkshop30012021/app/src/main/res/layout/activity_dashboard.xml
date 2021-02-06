@@ -9,10 +9,17 @@
 
     <TextView
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:id="@+id/loginid_txtview"
         android:textSize="18dp"
         android:textColor="@color/design_default_color_secondary"
         android:textStyle="bold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerview"
+        android:padding="10dp"/>
 
 </LinearLayout>

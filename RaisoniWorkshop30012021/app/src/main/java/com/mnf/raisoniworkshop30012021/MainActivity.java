@@ -1,6 +1,7 @@
 package com.mnf.raisoniworkshop30012021;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -23,32 +24,53 @@ public class MainActivity extends AppCompatActivity {
     EditText loginIDEdittext;
     EditText passwordEdittext;
     Button loginButton;
+    Button registerButton;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        sharedPreferences = getSharedPreferences(AppConstant.LOGIN_SHAREDPREFRECES,MODE_PRIVATE);
+
+        String sharedPreferencesStringuserName = sharedPreferences.getString(AppConstant.EMAILID,"");
+        String sharedPreferencesStringpassword = sharedPreferences.getString(AppConstant.PASSWORD,"");
+
         loginIDEdittext=findViewById(R.id.user_name);
         passwordEdittext=findViewById(R.id.user_password);
         loginButton=findViewById(R.id.login_button);
+        registerButton=findViewById(R.id.register_button);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String loginID=loginIDEdittext.getText().toString();
                 String password=passwordEdittext.getText().toString();
 
-                Toast.makeText(MainActivity.this, loginID, Toast.LENGTH_SHORT).show();
-                Snackbar.make(view,password, BaseTransientBottomBar.LENGTH_SHORT).show();
+                if(loginID.equals(sharedPreferences.getString(AppConstant.EMAILID,"")) && password.equals(sharedPreferences.getString(AppConstant.PASSWORD,""))) {
+                    Toast.makeText(MainActivity.this, loginID, Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, password, BaseTransientBottomBar.LENGTH_SHORT).show();
 
-                Bundle bundleForDashboard = new Bundle();
-                bundleForDashboard.putString(AppConstant.LOGINID_KEY,loginID);
-                bundleForDashboard.putString(AppConstant.PASSWORD_KEY,password);
+                    Bundle bundleForDashboard = new Bundle();
+                    bundleForDashboard.putString(AppConstant.LOGINID_KEY, loginID);
+                    bundleForDashboard.putString(AppConstant.PASSWORD_KEY, password);
 
-                Intent intentForDashboard = new Intent(MainActivity.this,DashboardActivity.class);
-                intentForDashboard.putExtras(bundleForDashboard);
-                startActivity(intentForDashboard);
+                    Intent intentForDashboard = new Intent(MainActivity.this, DashboardActivity.class);
+                    intentForDashboard.putExtras(bundleForDashboard);
+                    startActivity(intentForDashboard);
+                }else {
+                    Toast.makeText(MainActivity.this, "Unauthorized User", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,RegisterActivity.class);
+                startActivity(intent);
             }
         });
 

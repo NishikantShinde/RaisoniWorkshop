@@ -7,8 +7,16 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="login_button_name">Login</string>
+    <string name="register_button_name">Register</string>
     <string name="user_name_hint">Enter LoginID</string>
     <string name="user_password_hint">Enter Password</string>
+    <string name="user_repassword_hint">Enter Password Again</string>
+    <string name="user_full_name_hint">Enter Full Name</string>
+    <string name="user_emailid_hint">Enter Email Address</string>
+    <string name="submit_btn">Submit</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="full_name_error">Please enter Full Name</string>
+    <string name="password_error">Please enter Password</string>
+    <string name="emailId_error">Please enter EmailID</string>
 </resources>
